@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Photo Album | Silver Jubilee</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function showFullScreen(src) {
+            document.getElementById("fullscreen-img").src = src;
+            document.getElementById("fullscreen").style.display = "flex";
+        }
+
+        function closeFullScreen() {
+            document.getElementById("fullscreen").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <h1>📸 Our Beautiful Memories 📸</h1>
+    <div class="gallery">
+        {% for photo in photos %}
+        <div>
+            <img src="{{ url_for('static', filename='images/' + photo) }}" onclick="showFullScreen(this.src)">
+            <a href="{{ url_for('static', filename='images/' + photo) }}" download>
+                <button>⬇️ Download</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="fullscreen" class="fullscreen" onclick="closeFullScreen()">
+        <img id="fullscreen-img">
+        <span class="close-btn" onclick="closeFullScreen()">❌</span>
+    </div>
+</body>
+</html>
